@@ -1,0 +1,150 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Paper grain — a single fixed, static layer (no animation) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+img, svg, video { display: block; max-width: 100%; }
+img { height: auto; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+p { margin: 0 0 1em; text-wrap: pretty; }
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+
+:focus-visible { outline: none; box-shadow: var(--focus); border-radius: 2px; }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+::selection { background: var(--mustard); color: var(--ink); }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 200;
+  background: var(--forest); color: var(--paper);
+  padding: 0.6rem 1rem; font-family: var(--font-mono); font-size: var(--step--1);
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---------- Shared editorial primitives ---------- */
+
+/* Page frame leaves room for the margin route spine on desktop */
+.frame {
+  width: 100%;
+  max-width: calc(var(--max) + var(--spine));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-left: calc(var(--gutter) + var(--spine));
+}
+
+/* Mono route metadata: ROUTE 01 / VADODARA — GUJARAT */
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+.meta--accent { color: var(--terracotta-ink); }
+
+.rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  max-width: 34ch;
+}
+
+.italic { font-style: italic; }
+
+/* Editorial text link CTA — an underline that travels, not a pill */
+.cta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--step-0);
+  color: var(--ink);
+  text-decoration: none;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid currentColor;
+  background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0 2px;
+  transition: background-size 0.5s var(--ease-out), color 0.3s;
+  cursor: pointer;
+  border-top: 0; border-left: 0; border-right: 0;
+  background-color: transparent;
+}
+.cta:hover { background-size: 100% 2px; }
+.cta__arrow { font-family: var(--font-mono); font-weight: 400; transition: transform 0.4s var(--ease-out); }
+.cta:hover .cta__arrow { transform: translateX(0.35rem); }
+
+/* Solid variant: a stamped rectangular ticket, used once per view for the primary action */
+.cta--solid {
+  background: var(--forest);
+  color: var(--paper);
+  padding: 0.95rem 1.3rem 0.9rem;
+  border: 0;
+  border-radius: 2px;
+  position: relative;
+}
+.cta--solid::after {
+  /* perforated ticket edge */
+  content: '';
+  position: absolute; right: 2.9rem; top: 0.35rem; bottom: 0.35rem;
+  border-left: 1px dashed rgb(244 240 231 / 0.35);
+}
+.cta--solid:hover { background: var(--forest-soft); }
+
+/* Reveal-on-scroll base state (only when motion is allowed and JS is running) */
+.js-motion [data-reveal] { opacity: 0; transform: translateY(24px); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

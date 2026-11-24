@@ -1,0 +1,44 @@
+/* Aapnu Safar — "The Gujarat Travel Journal" design tokens */
+:root {
+  /* Palette — used with restraint; paper is the dominant surface */
+  --paper: #f4f0e7;
+  --paper-deep: #ebe5d7;
+  --paper-shade: #e0d8c6;
+  --forest: #233d32;
+  --forest-soft: #2f4f41;
+  --ink: #24251f;
+  --ink-soft: #55574c;
+  --ink-faint: #8a8a7c;
+  --terracotta: #b76545;
+  --terracotta-ink: #9a4f33; /* AA on paper for small text */
+  --mustard: #c6a45b;
+  --sage: #a8b5a0;
+  --rule: rgb(36 37 31 / 0.18);
+  --rule-strong: rgb(36 37 31 / 0.42);
+
+  /* Type */
+  --font-display: 'Instrument Serif', 'DM Serif Display', Georgia, serif;
+  --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --step--1: clamp(0.8rem, 0.78rem + 0.1vw, 0.86rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.1rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.5vw, 1.45rem);
+  --step-2: clamp(1.6rem, 1.35rem + 1.2vw, 2.3rem);
+  --step-3: clamp(2.2rem, 1.7rem + 2.4vw, 3.6rem);
+  --step-4: clamp(2.9rem, 2rem + 4.4vw, 6rem);
+  --step-5: clamp(3.6rem, 2.2rem + 7vw, 9.5rem);
+
+  /* Space & layout */
+  --gutter: clamp(1rem, 0.6rem + 2.4vw, 3rem);
+  --section: clamp(5rem, 3.5rem + 7vw, 11rem);
+  --spine: 0px; /* width reserved for the margin route spine (set on desktop) */
+  --max: 1440px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --focus: 0 0 0 2px var(--paper), 0 0 0 4px var(--terracotta);
+}
+
+@media (min-width: 1100px) {
+  :root { --spine: 88px; }
+}
