@@ -1,10 +1,11 @@
+
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../pages/HomePage.vue'
 
 const title = (t: string) => `${t} — Aapnu Safar`
 
 export const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/', component: HomePage, meta: { title: 'Aapnu Safar — Your Family. Our Responsibility.' } },
     { path: '/how-it-works', component: () => import('../pages/HowItWorksPage.vue'), meta: { title: title('How it works') } },
